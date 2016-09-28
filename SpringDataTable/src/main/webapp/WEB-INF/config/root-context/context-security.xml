@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc		
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd 
+		">
+	<security:global-method-security secured-annotations="enabled" />
+	<security:http use-expressions="true"> 
+		<!-- user -->
+		<security:intercept-url pattern="/user/login" access="permitAll()" method="GET"/>
+		<security:intercept-url pattern="/user/authenticate" access="permitAll()" method="POST"/> 
+		
+		<security:intercept-url pattern="/assets/**" access="permitAll()"/> 
+		<security:intercept-url pattern="/**" access="permitAll()"/>
+		<!-- <security:intercept-url pattern="/**" access="isAuthenticated()"/> -->
+		
+		
+		<security:form-login 
+			login-page="/user/login"
+			login-processing-url="/user/authenticate"
+			password-parameter="password"
+			username-parameter="username"
+			authentication-failure-url="/user/login?type=error"
+		/>
+		<security:logout logout-url="/user/logout"/>
+		
+		<security:custom-filter ref="restApiFilter" before="PRE_AUTH_FILTER"/>
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider ref="authenticationProvider"/>
+	</security:authentication-manager>
+	
+	<bean id="restApiFilter" class="com.spring.datatable.app.filters.RestApiFilter"></bean>
+	<bean id="authenticationProvider" class="com.spring.datatable.app.security.Oauth2AuthenticationProvider"></bean>
+</beans>

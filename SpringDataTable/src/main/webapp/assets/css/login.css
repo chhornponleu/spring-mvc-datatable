@@ -1,0 +1,3 @@
+body, .login-panel  { background-color: #b0c024; border:none;}
+.login-panel { margin-top:30%;}
+.form-control, .panel-default { -webkit-box-shadow: none; box-shadow: none;}
