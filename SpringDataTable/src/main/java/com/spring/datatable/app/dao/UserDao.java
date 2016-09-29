@@ -4,4 +4,5 @@ import com.spring.datatable.app.models.User;
 
 public interface UserDao {
 	User getByUsername(String username);
+	public void saveOrUpdate(User user);
 }

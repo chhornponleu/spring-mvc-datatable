@@ -10,14 +10,22 @@
 <html>
 	<head>
 		<title>Data Table</title>
-		<link rel="stylesheet" href="${baseURL}/assets/vendors/bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" href="${baseURL}/assets/vendors/datatables/css/jquery.dataTables.css">
-		
+<%-- 		<link rel="stylesheet" href="${baseURL}/assets/vendors/bootstrap/css/bootstrap.css"> --%>
+<%-- 		<link rel="stylesheet" href="${baseURL}/assets/vendors/datatables/css/jquery.dataTables.css"> --%>
+		<link rel="stylesheet" href="${baseURL}/assets/vendors/material-lite/css/material.min.css">
+		<link rel="stylesheet" href="${baseURL}/assets/vendors/datatables/css/dataTables.material.min.css">
+		<style>
+			.pagination:not()>li>a {
+				border-radius: 50%;
+				margin-left:10px;
+			}
+			
+		</style>
 	</head>
-<body >
+<body>
 	<h1>Data Table Server</h1>
 	
-	<table id="table_id" class="display">
+	<table id="table_id" class="mdl-data-table"  width="100%">
     	<thead>
     		<tr>
     			<th>User ID</th>
@@ -29,8 +37,8 @@
 	
 	
 	<script src="${baseURL}/assets/vendors/datatables/js/jquery.js"></script>
-	<script src="${baseURL}/assets/vendors/datatables/js/jquery.dataTables.js"></script>`
-	<%-- <script src="${baseURL}/assets/vendors/datatables/js/dataTables.bootstrap.js"></script> --%>
+	<script src="${baseURL}/assets/vendors/datatables/js/jquery.dataTables.js"></script>
+	<script src="${baseURL}/assets/vendors/datatables/js/dataTables.material.js"></script>
 	<script>
 		var page = {
 			init : function () {
@@ -51,9 +59,11 @@
 			          	}
 					},
 					columns: [
-		          		{ data: 'userId', 'name': 'userId' },
+		          		{ data: 'userId', 'name': 'userId'},
 		          		{ data: 'username', name : 'username' }
-		          	]
+		          	],
+		          	"scrollY": "200px",
+		            //"scrollCollapse": true,
 				});
 			}
 		};

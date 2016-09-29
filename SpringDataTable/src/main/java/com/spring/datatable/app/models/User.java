@@ -2,6 +2,8 @@ package com.spring.datatable.app.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,8 +15,9 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class User {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private String userId;
+	private Long userId;
 
 	@Column(name = "username")
 	private String username;
@@ -22,6 +25,14 @@ public class User {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "password")
 	private String password;
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 	public String getUsername() {
 		return username;
@@ -37,14 +48,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 }

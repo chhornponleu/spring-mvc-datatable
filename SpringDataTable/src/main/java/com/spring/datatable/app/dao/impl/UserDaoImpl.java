@@ -15,5 +15,8 @@ public class UserDaoImpl extends AbstrBaseDaoImpl implements UserDao {
 		qur.setParameter("username", username);
 		return (User) qur.uniqueResult();
 	}
-
+	
+	public void saveOrUpdate(User user) {
+		this.getSession().save(user);
+	}
 }

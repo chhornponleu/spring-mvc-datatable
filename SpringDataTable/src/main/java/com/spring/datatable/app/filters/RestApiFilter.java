@@ -7,18 +7,22 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.servlet.HandlerMapping;
 
+import com.spring.datatable.app.events.CustomEventPublisher;
+
 public class RestApiFilter extends GenericFilterBean {
+
+	@Autowired
+	CustomEventPublisher publisher;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		try {
-			System.out.println("\n\n");
-			System.out.println("Rest API Filter has been passed for url:" + this.getUrl(request));
-			System.out.println("\n\n");
+			//publisher.publishEvent("Hello");
 		} catch (Exception e) {
 
 		} finally {

@@ -32,7 +32,6 @@
 				url : options.url,
 				type : 'POST',
 				data : formData,
-				//async : false,
 				success : function(data) {
 					callback(data)
 				},
@@ -62,5 +61,4 @@
 			return false;
 		});
 	}
-
 })();

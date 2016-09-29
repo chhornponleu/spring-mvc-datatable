@@ -12,10 +12,16 @@
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security.xsd 
 		">
-		<context:annotation-config />
-		<context:property-placeholder location="classpath:properties/application.properties"/>
-		<context:component-scan base-package="com.spring.datatable"></context:component-scan>
-		
-		<import resource="context-datasource.xml"/>
-		<import resource="context-security.xml"/>
+	<context:annotation-config />
+	<context:property-placeholder location="classpath:properties/application.properties" />
+	<context:component-scan base-package="com.spring.datatable"></context:component-scan>
+
+	<bean id="applicationEventMulticaster" class="org.springframework.context.event.SimpleApplicationEventMulticaster">
+		<property name="taskExecutor">
+			<bean class="com.spring.datatable.app.events.CustomThreadPoolTaskExecutor" />
+		</property>
+	</bean>
+
+	<import resource="context-datasource.xml" />
+	<import resource="context-security.xml" />
 </beans>
